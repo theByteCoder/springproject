@@ -2,9 +2,22 @@ package com.spring.project.springproject.student;
 
 import java.time.LocalDate;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+
+@Entity
+@Table
 public class Student {
 
-	private Long id;
+	@Id
+	@SequenceGenerator(name = "student_sequence", sequenceName = "student_sequence", allocationSize = 1)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "student_sequence")
+
+	private Integer id;
 	private String name;
 	private String email;
 	private LocalDate dob;
@@ -22,7 +35,7 @@ public class Student {
 		this.age = age;
 	}
 
-	public Student(Long id, String name, String email, LocalDate dob, Integer age) {
+	public Student(Integer id, String name, String email, LocalDate dob, Integer age) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -31,11 +44,11 @@ public class Student {
 		this.age = age;
 	}
 
-	public Long getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
