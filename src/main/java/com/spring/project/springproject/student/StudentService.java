@@ -3,6 +3,8 @@ package com.spring.project.springproject.student;
 import java.util.List;
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,6 +36,14 @@ public class StudentService {
 			throw new IllegalStateException("Student is not present");
 		}
 		studentRepository.deleteById(studentId);
+	}
+
+	@Transactional
+	public void updateStudent(Integer studentId, String name, String email) {
+		Student student = studentRepository.findById(studentId)
+				.orElseThrow(() -> new IllegalStateException("Student is not present"));
+		student.setName(name);
+		student.setEmail(email);
 	}
 
 }
